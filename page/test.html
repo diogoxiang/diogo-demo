@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        
+        img {
+            width: 200px;
+            height: 200px;
+            border: 1px solid lightgrey;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+        <li><img src="" alt="" data-src="http://hdn.xnimg.cn/photos/hdn421/20170121/0000/h_main_D0cG_b0dc00061386195a.jpg"></li>
+    </ul>
+    <script>
+        //绑定事件
+        function bindEvent() {
+            document.addEventListener('scroll', lazyLoad, false)
+        }
+
+        //判断当前元素是否在视窗内
+        function ifIntoView(dom) {
+            var info = dom.getBoundingClientRect(),
+                clienHeight = window.innerHeight;
+            console.log(info)
+            if (0 < info.top && info.top < clienHeight) {
+                showImg(dom);
+            }
+
+        }
+
+        //显示图片
+        function showImg(dom) {
+            //延时是为了展示懒加载效果
+            setTimeout(function() {
+                dom.setAttribute('src', dom.dataset.src);
+            }, 500)
+        }
+
+        function lazyLoad() {
+            var selectorArray = Array.prototype.slice.call(document.querySelectorAll('img'));
+            selectorArray.forEach(function(element, index) {
+                if (!element.getAttribute('src')) {
+                    ifIntoView(element);
+                }
+            })
+        }
+
+        bindEvent();
+    </script>
+</body>
+
+</html>
